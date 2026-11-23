@@ -1,0 +1,5 @@
+# Grain packages
+
+## Structure
+
+The repository contains the instances of Grain package (OKPKG). Each folder define the ID of the package and inside it there are the relative versions.
