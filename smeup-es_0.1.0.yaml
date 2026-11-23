@@ -15,20 +15,46 @@ components:
     image: 100076361442.dkr.ecr.eu-south-1.amazonaws.com/kokos-java-as400proxy:5.0.0
     configuration:
       instance:
-        type: object,
+        type: object
+        title: AS400 Proxy instance
+        description: Connection settings of the AS400 proxy micro-executor instance
         properties:
-          A4P_SERVER: { type: string }
-          A4P_USER: { type: string }
-          A4P_PASSWORD: { type: string, format: password }
-          A4P_ENVIRONMENT: { type: string }
-          A4P_CONC_FUN: { type: integer, default: 1 }
-          MAX_NUMBER_OF_CELLS: { type: integer, default: 500000 }
+          A4P_SERVER:
+            type: string
+            title: AS400 server
+            description: Hostname or IP address of the AS400 server
+          A4P_USER:
+            type: string
+            title: AS400 user
+            description: User used to connect to the AS400 server
+          A4P_PASSWORD:
+            type: string
+            format: password
+            title: AS400 password
+            description: Password of the AS400 user
+          A4P_ENVIRONMENT:
+            type: string
+            title: AS400 environment
+            description: Default AS400 environment used by the proxy
+          MAX_NUMBER_OF_CELLS:
+            type: integer
+            default: 500000
+            title: Max number of cells
+            description: Maximum number of cells returned in a single response
         required: [A4P_SERVER, A4P_USER, A4P_PASSWORD, A4P_ENVIRONMENT]
       applicativeDomain:
         type: object
+        title: Applicative domain
+        description: AS400 settings specific to the applicative domain
         properties:
-          as400Environment: { type: string }
-          as400Ccsid: { type: integer }
+          as400Environment:
+            type: string
+            title: AS400 environment
+            description: AS400 environment of the applicative domain
+          as400Ccsid:
+            type: integer
+            title: AS400 CCSID
+            description: Coded Character Set Identifier used for AS400 data conversion
         required: [as400Environment, as400Ccsid]
 
   - name: me-java-h53
