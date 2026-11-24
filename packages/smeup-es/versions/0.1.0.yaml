@@ -4,7 +4,7 @@ components:
   dsls:
     - name: kokos-dsl-smeupes
       repository: https://github.com/smeup/kokos-dsl-smeupes
-      ref: develop
+      ref: 1.0.0
 
   microExecutors:
     - name: me-java-as400-proxy
