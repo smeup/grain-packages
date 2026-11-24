@@ -7,3 +7,6 @@ packages:
   - version: 0.1.0
     grainVersion: 9.0.0
     publishedAt: '2026-11-19T10:00:00Z'
+  - version: 0.2.0
+    grainVersion: 9.0.0
+    publishedAt: '2026-11-19T15:59:00Z'
