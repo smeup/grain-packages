@@ -1,0 +1,39 @@
+name: Packages
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml==6.0.2
+
+      - name: Index is up to date
+        run: python3 scripts/build_index.py --check
+
+      # a published version is immutable: it can only be added
+      - name: Versions are immutable
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            echo "No base commit to compare with"
+            exit 0
+          fi
+          changed=$(git diff --name-status --no-renames --diff-filter=MD "$BASE" HEAD -- 'packages/*/versions/*.yaml')
+          if [ -n "$changed" ]; then
+            echo "Published versions can't be changed or removed: publish a new version instead"
+            echo "$changed"
+            exit 1
+          fi

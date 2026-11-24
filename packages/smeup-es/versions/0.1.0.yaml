@@ -1,8 +1,4 @@
-name: smeup-es
-version: latest
-grainVersion: latest
-publisher: Smeup LAB
-description: Smeup Enterprise Suite
+grainVersion: 9.0.0
 publishedAt: 2026-11-19T10:00:00Z
 components:
   dsls:
@@ -12,7 +8,7 @@ components:
 
   microExecutors:
     - name: me-java-as400-proxy
-      image: 100076361442.dkr.ecr.eu-south-1.amazonaws.com/kokos-java-as400proxy:latest
+      image: 100076361442.dkr.ecr.eu-south-1.amazonaws.com/kokos-java-as400proxy:5.0.0
       configuration:
         instance:
           type: object
@@ -58,4 +54,4 @@ components:
           required: [as400Environment, as400Ccsid]
 
     - name: me-java-h53
-      image: 100076361442.dkr.ecr.eu-south-1.amazonaws.com/kokos-java-h53:latest
+      image: 100076361442.dkr.ecr.eu-south-1.amazonaws.com/kokos-java-h53:3.0.0
